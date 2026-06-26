@@ -2,7 +2,9 @@ import Link from "next/link";
 import { ArrowUpRight } from "lucide-react";
 
 import { Logo } from "@/components/logo";
-import { ParallaxSection } from "@/components/parallax-section";
+import { ParallaxBackground } from "@/components/parallax-section";
+import { StoreLinks } from "@/components/store-links";
+import { SiteFooter } from "@/components/site-footer";
 import { projects } from "@/lib/projects";
 
 const values = [
@@ -44,19 +46,13 @@ export default function Home() {
     <>
       {/* Banner principal */}
       <header className="relative flex min-h-screen w-full flex-col overflow-hidden border-b border-border">
-        <ParallaxSection speed={60} className="pointer-events-none absolute inset-0">
-          <div className="absolute -right-32 -top-32 size-[36rem] rounded-full bg-accent/20 blur-3xl" />
-          <div className="absolute -bottom-40 left-1/4 size-[28rem] rounded-full bg-accent/10 blur-3xl" />
-        </ParallaxSection>
+        <ParallaxBackground src="/images/parallax-hero.svg" speed={140} />
 
         <div className="relative z-10 px-6 py-8 md:px-10">
           <Logo />
         </div>
 
-        <ParallaxSection
-          speed={20}
-          className="relative z-10 flex flex-1 flex-col justify-end px-6 pb-20 md:px-10 md:pb-32"
-        >
+        <div className="relative z-10 flex flex-1 flex-col justify-end px-6 pb-16 md:px-10 md:pb-24">
           <h1 className="max-w-4xl text-5xl font-semibold tracking-tight md:text-7xl">
             Construímos os produtos que imaginamos.
           </h1>
@@ -64,22 +60,27 @@ export default function Home() {
             NexusCraft é o grupo que reúne os nossos projetos, aplicações e
             startups sob os mesmos princípios de engenharia e design.
           </p>
-        </ParallaxSection>
+          <div className="mt-10">
+            <StoreLinks />
+          </div>
+        </div>
       </header>
 
       <main className="flex-1">
         {/* Valores */}
-        <section className="border-b border-border">
-          <div className="border-b border-border px-6 py-6 md:px-10">
+        <section className="relative flex min-h-screen w-full flex-col overflow-hidden border-b border-border">
+          <ParallaxBackground src="/images/parallax-values.svg" speed={100} />
+
+          <div className="relative z-10 border-b border-border px-6 py-6 md:px-10">
             <h2 className="text-sm font-mono uppercase tracking-widest text-accent">
               01 — Valores &amp; Princípios
             </h2>
           </div>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4">
+          <div className="relative z-10 grid flex-1 grid-cols-1 md:grid-cols-2 lg:grid-cols-4">
             {values.map((value, i) => (
               <div
                 key={value.title}
-                className={`border-b border-border p-8 md:border-b-0 ${
+                className={`flex flex-col justify-center border-b border-border p-8 md:border-b-0 ${
                   i !== values.length - 1 ? "md:border-r" : ""
                 } border-border`}
               >
@@ -96,13 +97,15 @@ export default function Home() {
         </section>
 
         {/* Projetos */}
-        <section className="border-b border-border">
-          <div className="border-b border-border px-6 py-6 md:px-10">
+        <section className="relative flex min-h-screen w-full flex-col overflow-hidden border-b border-border">
+          <ParallaxBackground src="/images/parallax-projects.svg" speed={100} />
+
+          <div className="relative z-10 border-b border-border px-6 py-6 md:px-10">
             <h2 className="text-sm font-mono uppercase tracking-widest text-accent">
               02 — Projetos
             </h2>
           </div>
-          <div className="grid grid-cols-1 md:grid-cols-3">
+          <div className="relative z-10 grid flex-1 grid-cols-1 md:grid-cols-3">
             {projects.map((project, i) => (
               <Link
                 key={project.slug}
@@ -127,17 +130,19 @@ export default function Home() {
         </section>
 
         {/* Stack */}
-        <section>
-          <div className="border-b border-border px-6 py-6 md:px-10">
+        <section className="relative flex min-h-screen w-full flex-col overflow-hidden">
+          <ParallaxBackground src="/images/parallax-stack.svg" speed={100} />
+
+          <div className="relative z-10 border-b border-border px-6 py-6 md:px-10">
             <h2 className="text-sm font-mono uppercase tracking-widest text-accent">
               03 — Stack Tecnológica
             </h2>
           </div>
-          <div className="grid grid-cols-2 md:grid-cols-4">
+          <div className="relative z-10 grid flex-1 grid-cols-2 md:grid-cols-4">
             {stack.map((tech, i) => (
               <div
                 key={tech}
-                className={`border-b border-border p-8 text-center font-mono text-sm md:p-10 ${
+                className={`flex items-center justify-center border-b border-border p-8 text-center font-mono text-sm md:p-10 ${
                   (i + 1) % 4 !== 0 ? "md:border-r" : ""
                 } ${(i + 1) % 2 !== 0 ? "border-r" : ""} border-border`}
               >
@@ -148,9 +153,7 @@ export default function Home() {
         </section>
       </main>
 
-      <footer className="border-t border-border px-6 py-8 text-xs text-muted-foreground md:px-10">
-        © {new Date().getFullYear()} NexusCraft. Todos os direitos reservados.
-      </footer>
+      <SiteFooter />
     </>
   );
 }
