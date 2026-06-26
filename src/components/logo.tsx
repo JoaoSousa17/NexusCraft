@@ -1,3 +1,5 @@
+import Image from "next/image";
+
 import { cn } from "@/lib/utils";
 
 export function Logo({
@@ -8,19 +10,17 @@ export function Logo({
   size?: "default" | "lg";
 }) {
   return (
-    <span
+    <Image
+      src="/logo.png"
+      alt="NexusCraft"
+      width={992}
+      height={992}
+      priority
       className={cn(
-        "inline-flex items-center gap-0 font-display uppercase leading-none tracking-tight",
-        size === "lg" ? "text-3xl md:text-5xl" : "text-lg",
+        "h-auto w-auto object-contain",
+        size === "lg" ? "max-h-32 md:max-h-48" : "max-h-14",
         className
       )}
-    >
-      <span className="bg-gradient-to-b from-white to-neutral-400 bg-clip-text text-transparent">
-        NEXUS
-      </span>
-      <span className="ml-2 bg-accent px-2 py-0.5 text-background">
-        CRAFT
-      </span>
-    </span>
+    />
   );
 }
