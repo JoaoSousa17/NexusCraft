@@ -9,7 +9,7 @@ const links = [
 export function SiteFooter() {
   return (
     <footer className="border-t border-border">
-      <div className="grid grid-cols-1 md:grid-cols-3">
+      <div className="grid grid-cols-1 border-b border-border md:grid-cols-3">
         {links.map((link, i) => (
           <Link
             key={link.href}

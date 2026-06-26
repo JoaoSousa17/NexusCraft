@@ -2,9 +2,11 @@ import Link from "next/link";
 import { ArrowUpRight } from "lucide-react";
 
 import { Logo } from "@/components/logo";
-import { ParallaxBackground } from "@/components/parallax-section";
+import { ParallaxBackground, ParallaxAccent } from "@/components/parallax-section";
 import { StoreLinks } from "@/components/store-links";
 import { SiteFooter } from "@/components/site-footer";
+import { SectionTitle } from "@/components/section-title";
+import { TechIcon, techs } from "@/components/tech-icon";
 import { projects } from "@/lib/projects";
 
 const values = [
@@ -30,30 +32,24 @@ const values = [
   },
 ];
 
-const stack = [
-  "Next.js",
-  "React",
-  "TypeScript",
-  "Tailwind CSS",
-  "shadcn/ui",
-  "Supabase",
-  "PostgreSQL",
-  "Node.js",
-];
-
 export default function Home() {
   return (
     <>
       {/* Banner principal */}
       <header className="relative flex min-h-screen w-full flex-col overflow-hidden border-b border-border">
-        <ParallaxBackground src="/images/parallax-hero.svg" speed={140} />
+        <ParallaxBackground src="/images/parallax-hero.svg" speed={160} />
+        <ParallaxAccent
+          speed={120}
+          rotate={25}
+          className="-right-24 top-24 size-72 border border-accent/30 md:size-96"
+        />
 
         <div className="relative z-10 px-6 py-8 md:px-10">
-          <Logo />
+          <Logo size="lg" />
         </div>
 
         <div className="relative z-10 flex flex-1 flex-col justify-end px-6 pb-16 md:px-10 md:pb-24">
-          <h1 className="max-w-4xl text-5xl font-semibold tracking-tight md:text-7xl">
+          <h1 className="max-w-4xl font-display text-5xl uppercase leading-[1.05] tracking-tight md:text-7xl">
             Construímos os produtos que imaginamos.
           </h1>
           <p className="mt-6 max-w-xl text-base text-muted-foreground md:text-lg">
@@ -72,9 +68,7 @@ export default function Home() {
           <ParallaxBackground src="/images/parallax-values.svg" speed={100} />
 
           <div className="relative z-10 border-b border-border px-6 py-6 md:px-10">
-            <h2 className="text-sm font-mono uppercase tracking-widest text-accent">
-              01 — Valores &amp; Princípios
-            </h2>
+            <SectionTitle index="01">Valores &amp; Princípios</SectionTitle>
           </div>
           <div className="relative z-10 grid flex-1 grid-cols-1 md:grid-cols-2 lg:grid-cols-4">
             {values.map((value, i) => (
@@ -101,9 +95,7 @@ export default function Home() {
           <ParallaxBackground src="/images/parallax-projects.svg" speed={100} />
 
           <div className="relative z-10 border-b border-border px-6 py-6 md:px-10">
-            <h2 className="text-sm font-mono uppercase tracking-widest text-accent">
-              02 — Projetos
-            </h2>
+            <SectionTitle index="02">Projetos</SectionTitle>
           </div>
           <div className="relative z-10 grid flex-1 grid-cols-1 md:grid-cols-3">
             {projects.map((project, i) => (
@@ -134,21 +126,25 @@ export default function Home() {
           <ParallaxBackground src="/images/parallax-stack.svg" speed={100} />
 
           <div className="relative z-10 border-b border-border px-6 py-6 md:px-10">
-            <h2 className="text-sm font-mono uppercase tracking-widest text-accent">
-              03 — Stack Tecnológica
-            </h2>
+            <SectionTitle index="03">Stack Tecnológica</SectionTitle>
           </div>
-          <div className="relative z-10 grid flex-1 grid-cols-2 md:grid-cols-4">
-            {stack.map((tech, i) => (
-              <div
-                key={tech}
-                className={`flex items-center justify-center border-b border-border p-8 text-center font-mono text-sm md:p-10 ${
-                  (i + 1) % 4 !== 0 ? "md:border-r" : ""
-                } ${(i + 1) % 2 !== 0 ? "border-r" : ""} border-border`}
-              >
-                {tech}
-              </div>
-            ))}
+          <div className="relative z-10 grid flex-1 place-items-center px-6 py-12 md:px-10">
+            <div className="grid grid-cols-2 gap-8 md:grid-cols-4 md:gap-12">
+              {techs.map((tech) => (
+                <div
+                  key={tech.name}
+                  className="flex flex-col items-center gap-3 text-center"
+                >
+                  <TechIcon
+                    icon={tech.icon}
+                    className="size-10 text-muted-foreground transition-colors hover:text-accent md:size-12"
+                  />
+                  <span className="font-mono text-xs text-muted-foreground md:text-sm">
+                    {tech.name}
+                  </span>
+                </div>
+              ))}
+            </div>
           </div>
         </section>
       </main>

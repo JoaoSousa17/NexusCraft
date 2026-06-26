@@ -8,7 +8,7 @@ export default function ContactoPage() {
 
       <main className="flex-1">
         <div className="border-b border-border px-6 py-20 md:px-10 md:py-32">
-          <h1 className="max-w-3xl text-4xl font-semibold tracking-tight md:text-6xl">
+          <h1 className="max-w-3xl font-display text-4xl uppercase tracking-tight md:text-6xl">
             Contacto
           </h1>
           <p className="mt-6 max-w-xl text-base text-muted-foreground md:text-lg">

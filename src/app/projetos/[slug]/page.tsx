@@ -28,7 +28,7 @@ export default async function ProjectPage({
           <span className="font-mono text-xs uppercase tracking-widest text-accent">
             {project.status}
           </span>
-          <h1 className="mt-4 max-w-3xl text-4xl font-semibold tracking-tight md:text-6xl">
+          <h1 className="mt-4 max-w-3xl font-display text-4xl uppercase tracking-tight md:text-6xl">
             {project.name}
           </h1>
           <p className="mt-6 max-w-xl text-base text-muted-foreground md:text-lg">
