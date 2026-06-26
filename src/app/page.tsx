@@ -2,6 +2,7 @@ import Link from "next/link";
 import { ArrowUpRight } from "lucide-react";
 
 import { Logo } from "@/components/logo";
+import { ParallaxSection } from "@/components/parallax-section";
 import { projects } from "@/lib/projects";
 
 const values = [
@@ -41,27 +42,36 @@ const stack = [
 export default function Home() {
   return (
     <>
-      {/* Top banner */}
-      <header className="w-full border-b border-border">
-        <div className="flex h-20 w-full items-center px-6 md:px-10">
+      {/* Banner principal */}
+      <header className="relative flex min-h-screen w-full flex-col overflow-hidden border-b border-border">
+        <ParallaxSection speed={60} className="pointer-events-none absolute inset-0">
+          <div className="absolute -right-32 -top-32 size-[36rem] rounded-full bg-accent/20 blur-3xl" />
+          <div className="absolute -bottom-40 left-1/4 size-[28rem] rounded-full bg-accent/10 blur-3xl" />
+        </ParallaxSection>
+
+        <div className="relative z-10 px-6 py-8 md:px-10">
           <Logo />
         </div>
-        <div className="border-t border-border px-6 py-20 md:px-10 md:py-32">
-          <h1 className="max-w-3xl text-4xl font-semibold tracking-tight md:text-6xl">
+
+        <ParallaxSection
+          speed={20}
+          className="relative z-10 flex flex-1 flex-col justify-end px-6 pb-20 md:px-10 md:pb-32"
+        >
+          <h1 className="max-w-4xl text-5xl font-semibold tracking-tight md:text-7xl">
             Construímos os produtos que imaginamos.
           </h1>
           <p className="mt-6 max-w-xl text-base text-muted-foreground md:text-lg">
             NexusCraft é o grupo que reúne os nossos projetos, aplicações e
             startups sob os mesmos princípios de engenharia e design.
           </p>
-        </div>
+        </ParallaxSection>
       </header>
 
       <main className="flex-1">
         {/* Valores */}
         <section className="border-b border-border">
           <div className="border-b border-border px-6 py-6 md:px-10">
-            <h2 className="text-sm font-mono uppercase tracking-widest text-muted-foreground">
+            <h2 className="text-sm font-mono uppercase tracking-widest text-accent">
               01 — Valores &amp; Princípios
             </h2>
           </div>
@@ -73,7 +83,7 @@ export default function Home() {
                   i !== values.length - 1 ? "md:border-r" : ""
                 } border-border`}
               >
-                <span className="font-mono text-xs text-muted-foreground">
+                <span className="font-mono text-xs text-accent">
                   {String(i + 1).padStart(2, "0")}
                 </span>
                 <h3 className="mt-4 text-lg font-medium">{value.title}</h3>
@@ -88,7 +98,7 @@ export default function Home() {
         {/* Projetos */}
         <section className="border-b border-border">
           <div className="border-b border-border px-6 py-6 md:px-10">
-            <h2 className="text-sm font-mono uppercase tracking-widest text-muted-foreground">
+            <h2 className="text-sm font-mono uppercase tracking-widest text-accent">
               02 — Projetos
             </h2>
           </div>
@@ -110,7 +120,7 @@ export default function Home() {
                     {project.tagline}
                   </p>
                 </div>
-                <ArrowUpRight className="mt-8 size-5 text-muted-foreground transition-transform group-hover:translate-x-1 group-hover:-translate-y-1 group-hover:text-foreground" />
+                <ArrowUpRight className="mt-8 size-5 text-muted-foreground transition-transform group-hover:translate-x-1 group-hover:-translate-y-1 group-hover:text-accent" />
               </Link>
             ))}
           </div>
@@ -119,7 +129,7 @@ export default function Home() {
         {/* Stack */}
         <section>
           <div className="border-b border-border px-6 py-6 md:px-10">
-            <h2 className="text-sm font-mono uppercase tracking-widest text-muted-foreground">
+            <h2 className="text-sm font-mono uppercase tracking-widest text-accent">
               03 — Stack Tecnológica
             </h2>
           </div>

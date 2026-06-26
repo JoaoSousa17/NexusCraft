@@ -1,36 +1,74 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# NexusCraft
 
-## Getting Started
+Site institucional da NexusCraft — o grupo que reúne os projetos, apps e
+startups da casa sob os mesmos princípios de engenharia e design.
 
-First, run the development server:
+Design minimalista, sem barras de navegação, dividido em secções em forma
+de grelha de retângulos com linhas retas (inspiração: [uptec](https://uptec.up.pt)
+e [BuildUpLabs](https://builduplabs.com)), com um banner principal a ocupar
+o ecrã inteiro e efeito de parallax por secção.
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+## Stack
+
+- [Next.js](https://nextjs.org) (App Router)
+- [TypeScript](https://www.typescriptlang.org)
+- [Tailwind CSS](https://tailwindcss.com)
+- [shadcn/ui](https://ui.shadcn.com)
+- [Framer Motion](https://www.framer.com/motion) — efeito de parallax
+- [Supabase](https://supabase.com) — base de dados e autenticação
+
+## Estrutura
+
+```
+src/
+  app/
+    page.tsx                  Homepage (banner, valores, projetos, stack)
+    projetos/[slug]/page.tsx  Página individual de cada projeto
+  components/
+    logo.tsx                  Wordmark da NexusCraft
+    site-banner.tsx           Banner com back button (páginas de projeto)
+    parallax-section.tsx      Wrapper de parallax baseado em scroll
+    ui/                       Componentes shadcn/ui
+  lib/
+    projects.ts               Lista de projetos (atualmente com placeholders)
+    supabase/                 Clientes Supabase (browser e servidor)
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## Desenvolvimento
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+```bash
+npm install
+npm run dev
+```
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+Abrir [http://localhost:3000](http://localhost:3000).
 
-## Learn More
+### Variáveis de ambiente
 
-To learn more about Next.js, take a look at the following resources:
+Copiar `.env.example` para `.env.local` e preencher as chaves do projeto
+Supabase:
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+```bash
+cp .env.example .env.local
+```
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+```
+NEXT_PUBLIC_SUPABASE_URL=
+NEXT_PUBLIC_SUPABASE_ANON_KEY=
+```
 
-## Deploy on Vercel
+## Scripts
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+| Comando         | Descrição                          |
+| --------------- | ----------------------------------- |
+| `npm run dev`   | Inicia o servidor de desenvolvimento |
+| `npm run build` | Build de produção                   |
+| `npm run start` | Inicia o build de produção          |
+| `npm run lint`  | Corre o ESLint                      |
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+## Conteúdo a atualizar
+
+- `src/lib/projects.ts` — substituir os projetos placeholder pelos projetos
+  reais (nome, descrição, estado).
+- `public/` — adicionar o logo definitivo da NexusCraft e substituir o
+  wordmark em `src/components/logo.tsx`.

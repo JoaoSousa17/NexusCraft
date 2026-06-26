@@ -25,7 +25,7 @@ export default async function ProjectPage({
 
       <main className="flex-1">
         <div className="border-b border-border px-6 py-20 md:px-10 md:py-32">
-          <span className="font-mono text-xs uppercase tracking-widest text-muted-foreground">
+          <span className="font-mono text-xs uppercase tracking-widest text-accent">
             {project.status}
           </span>
           <h1 className="mt-4 max-w-3xl text-4xl font-semibold tracking-tight md:text-6xl">
