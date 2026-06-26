@@ -18,7 +18,7 @@ export function Logo({
       priority
       className={cn(
         "h-auto w-auto object-contain",
-        size === "lg" ? "max-h-32 md:max-h-48" : "max-h-14",
+        size === "lg" ? "max-h-44 md:max-h-72" : "max-h-14",
         className
       )}
     />

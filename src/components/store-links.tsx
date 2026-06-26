@@ -1,24 +1,41 @@
-import { Globe, Smartphone, Apple } from "lucide-react";
+import { Globe, Smartphone, Apple, Link as LinkIcon } from "lucide-react";
 
-const stores = [
-  { name: "Google Play", href: "#", icon: Smartphone },
-  { name: "App Store", href: "#", icon: Apple },
-  { name: "Chrome Web Store", href: "#", icon: Globe },
-];
+import type { SiteLink } from "@/lib/data/links";
 
-export function StoreLinks() {
+const iconMap: Record<string, typeof Globe> = {
+  smartphone: Smartphone,
+  apple: Apple,
+  globe: Globe,
+};
+
+function captionFor(label: string) {
+  if (label.toLowerCase().includes("chrome")) return "Extensão na";
+  return "Disponível em";
+}
+
+export function StoreLinks({ links }: { links: SiteLink[] }) {
   return (
-    <div className="flex flex-wrap gap-4">
-      {stores.map(({ name, href, icon: Icon }) => (
-        <a
-          key={name}
-          href={href}
-          className="group relative flex items-center gap-3 overflow-hidden rounded-full border border-white/15 bg-white/5 px-5 py-3 text-xs font-semibold uppercase tracking-wide text-foreground backdrop-blur-sm transition-all hover:border-accent hover:bg-accent hover:text-background"
-        >
-          <Icon className="size-4 transition-transform group-hover:scale-110" />
-          {name}
-        </a>
-      ))}
+    <div className="flex flex-wrap gap-3">
+      {links.map((link) => {
+        const Icon = iconMap[link.icon_slug] ?? LinkIcon;
+        return (
+          <a
+            key={link.id}
+            href={link.href}
+            className="group relative flex items-center gap-3 overflow-hidden border border-border bg-muted/40 px-4 py-3 transition-all hover:border-accent hover:bg-accent"
+          >
+            <Icon className="size-5 shrink-0 text-foreground transition-colors group-hover:text-background" />
+            <span className="flex flex-col text-left leading-tight">
+              <span className="text-[10px] uppercase tracking-wide text-muted-foreground transition-colors group-hover:text-background/70">
+                {captionFor(link.label)}
+              </span>
+              <span className="text-xs font-semibold uppercase tracking-wide text-foreground transition-colors group-hover:text-background">
+                {link.label}
+              </span>
+            </span>
+          </a>
+        );
+      })}
     </div>
   );
 }

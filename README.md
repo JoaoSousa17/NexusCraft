@@ -23,16 +23,37 @@ o ecrã inteiro e efeito de parallax por secção.
 src/
   app/
     page.tsx                  Homepage (banner, valores, projetos, stack)
-    projetos/[slug]/page.tsx  Página individual de cada projeto
+    projetos/[slug]/page.tsx  Página individual de cada projeto (Markdown + HTML)
+    login/                    Página de autenticação (Supabase)
+    admin/                    Painel de administração (projetos, stack, links)
   components/
     logo.tsx                  Wordmark da NexusCraft
     site-banner.tsx           Banner com back button (páginas de projeto)
     parallax-section.tsx      Wrapper de parallax baseado em scroll
     ui/                       Componentes shadcn/ui
   lib/
-    projects.ts               Lista de projetos (atualmente com placeholders)
+    projects.ts               Fallback estático usado quando o Supabase não está configurado
+    data/                     Acesso a dados (projetos, stack, links) com fallback estático
     supabase/                 Clientes Supabase (browser e servidor)
+  proxy.ts                    Protege /admin e /login (auth Supabase)
+supabase/
+  migrations/                 Schema SQL (tabelas + storage bucket)
 ```
+
+## Painel de administração
+
+`/admin` (protegido por autenticação Supabase, redireciona para `/login`)
+permite gerir:
+
+- **Projetos** — CRUD completo: slug, título, tag/estado, descrição breve,
+  descrição longa (Markdown com suporte a HTML/CSS embutido), foto principal,
+  foto logo e foto de capa (upload para o Storage bucket `project-images`).
+- **Stack tecnológica** — sempre exatamente 8 entradas fixas; só é possível
+  editar o nome e o ícone (slug do pacote `simple-icons`) de cada uma.
+- **Links** — links do banner principal (lojas) e da página de contacto.
+
+Para criar um utilizador admin, usa o painel do Supabase (Authentication →
+Add user) com email e password.
 
 ## Desenvolvimento
 
@@ -66,9 +87,10 @@ NEXT_PUBLIC_SUPABASE_ANON_KEY=
 | `npm run start` | Inicia o build de produção          |
 | `npm run lint`  | Corre o ESLint                      |
 
-## Conteúdo a atualizar
+## Base de dados
 
-- `src/lib/projects.ts` — substituir os projetos placeholder pelos projetos
-  reais (nome, descrição, estado).
-- `public/` — adicionar o logo definitivo da NexusCraft e substituir o
-  wordmark em `src/components/logo.tsx`.
+Aplicar as migrations em `supabase/migrations/` ao projeto Supabase (SQL
+editor ou `supabase db push`) para criar as tabelas `projects`,
+`stack_items`, `site_links` e o bucket de Storage `project-images`. Sem
+estas migrations o site usa os dados estáticos de fallback em
+`src/lib/projects.ts` e nos módulos em `src/lib/data/`.

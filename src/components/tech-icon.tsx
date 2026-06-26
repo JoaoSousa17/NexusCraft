@@ -1,24 +1,11 @@
-import {
-  siNextdotjs,
-  siReact,
-  siTypescript,
-  siTailwindcss,
-  siShadcnui,
-  siSupabase,
-  siPostgresql,
-  siNodedotjs,
-} from "simple-icons";
+import * as simpleIcons from "simple-icons";
 
-export const techs = [
-  { name: "Next.js", icon: siNextdotjs },
-  { name: "React", icon: siReact },
-  { name: "TypeScript", icon: siTypescript },
-  { name: "Tailwind CSS", icon: siTailwindcss },
-  { name: "shadcn/ui", icon: siShadcnui },
-  { name: "Supabase", icon: siSupabase },
-  { name: "PostgreSQL", icon: siPostgresql },
-  { name: "Node.js", icon: siNodedotjs },
-];
+export function resolveIcon(iconSlug: string): { path: string } {
+  const icon = (simpleIcons as unknown as Record<string, { path: string }>)[
+    iconSlug
+  ];
+  return icon ?? { path: "" };
+}
 
 export function TechIcon({
   icon,

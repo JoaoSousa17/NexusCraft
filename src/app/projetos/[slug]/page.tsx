@@ -1,9 +1,13 @@
 import { notFound } from "next/navigation";
+import ReactMarkdown from "react-markdown";
+import rehypeRaw from "rehype-raw";
+import remarkGfm from "remark-gfm";
 
 import { SiteBanner } from "@/components/site-banner";
-import { getProject, projects } from "@/lib/projects";
+import { listProjects, getProjectBySlug } from "@/lib/data/projects";
 
-export function generateStaticParams() {
+export async function generateStaticParams() {
+  const projects = await listProjects();
   return projects.map((project) => ({ slug: project.slug }));
 }
 
@@ -13,7 +17,7 @@ export default async function ProjectPage({
   params: Promise<{ slug: string }>;
 }) {
   const { slug } = await params;
-  const project = getProject(slug);
+  const project = await getProjectBySlug(slug);
 
   if (!project) {
     notFound();
@@ -24,7 +28,15 @@ export default async function ProjectPage({
       <SiteBanner back />
 
       <main className="flex-1">
-        <div className="border-b border-border px-6 py-20 md:px-10 md:py-32">
+        <div className="relative border-b border-border px-6 py-20 md:px-10 md:py-32">
+          {project.cover_image && (
+            // eslint-disable-next-line @next/next/no-img-element
+            <img
+              src={project.cover_image}
+              alt=""
+              className="absolute inset-0 -z-10 size-full object-cover opacity-30"
+            />
+          )}
           <span className="font-mono text-xs uppercase tracking-widest text-accent">
             {project.status}
           </span>
@@ -41,9 +53,14 @@ export default async function ProjectPage({
             <h2 className="text-sm font-mono uppercase tracking-widest text-muted-foreground">
               Sobre o projeto
             </h2>
-            <p className="mt-6 text-sm leading-relaxed text-muted-foreground md:text-base">
-              {project.description}
-            </p>
+            <div className="prose prose-invert mt-6 max-w-none text-sm leading-relaxed text-muted-foreground md:text-base">
+              <ReactMarkdown
+                rehypePlugins={[rehypeRaw]}
+                remarkPlugins={[remarkGfm]}
+              >
+                {project.description_long || project.description}
+              </ReactMarkdown>
+            </div>
           </div>
           <div className="p-8 md:p-10">
             <h2 className="text-sm font-mono uppercase tracking-widest text-muted-foreground">

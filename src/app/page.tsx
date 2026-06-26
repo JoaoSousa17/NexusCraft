@@ -6,8 +6,10 @@ import { ParallaxBackground, ParallaxAccent } from "@/components/parallax-sectio
 import { StoreLinks } from "@/components/store-links";
 import { SiteFooter } from "@/components/site-footer";
 import { SectionTitle } from "@/components/section-title";
-import { TechIcon, techs } from "@/components/tech-icon";
-import { projects } from "@/lib/projects";
+import { TechIcon, resolveIcon } from "@/components/tech-icon";
+import { listProjects } from "@/lib/data/projects";
+import { listStackItems } from "@/lib/data/stack";
+import { listSiteLinks } from "@/lib/data/links";
 
 const values = [
   {
@@ -32,7 +34,13 @@ const values = [
   },
 ];
 
-export default function Home() {
+export default async function Home() {
+  const [projects, techs, storeLinks] = await Promise.all([
+    listProjects(),
+    listStackItems(),
+    listSiteLinks("store"),
+  ]);
+
   return (
     <>
       {/* Banner principal */}
@@ -44,20 +52,23 @@ export default function Home() {
           className="-right-24 top-24 size-72 border border-accent/30 md:size-96"
         />
 
-        <div className="relative z-10 px-6 py-8 md:px-10">
-          <Logo size="lg" />
-        </div>
+        <div className="relative z-10 flex flex-1 flex-col justify-center gap-12 px-6 py-16 md:flex-row md:items-center md:justify-between md:px-10">
+          <div className="flex flex-col">
+            <Logo size="lg" />
+            <h1 className="mt-10 max-w-xl font-display text-5xl uppercase leading-[1.05] tracking-tight md:text-6xl">
+              Construímos os produtos que imaginamos.
+            </h1>
+            <p className="mt-6 max-w-md text-base text-muted-foreground md:text-lg">
+              NexusCraft é o grupo que reúne os nossos projetos, aplicações e
+              startups sob os mesmos princípios de engenharia e design.
+            </p>
+          </div>
 
-        <div className="relative z-10 flex flex-1 flex-col justify-end px-6 pb-16 md:px-10 md:pb-24">
-          <h1 className="max-w-4xl font-display text-5xl uppercase leading-[1.05] tracking-tight md:text-7xl">
-            Construímos os produtos que imaginamos.
-          </h1>
-          <p className="mt-6 max-w-xl text-base text-muted-foreground md:text-lg">
-            NexusCraft é o grupo que reúne os nossos projetos, aplicações e
-            startups sob os mesmos princípios de engenharia e design.
-          </p>
-          <div className="mt-10">
-            <StoreLinks />
+          <div className="flex flex-col items-start gap-6 border-t border-border pt-8 md:items-end md:border-t-0 md:border-l md:pl-12 md:pt-0">
+            <span className="font-mono text-xs uppercase tracking-widest text-muted-foreground">
+              Disponível em
+            </span>
+            <StoreLinks links={storeLinks} />
           </div>
         </div>
       </header>
@@ -128,23 +139,25 @@ export default function Home() {
           <div className="relative z-10 border-b border-border px-6 py-6 md:px-10">
             <SectionTitle index="03">Stack Tecnológica</SectionTitle>
           </div>
-          <div className="relative z-10 grid flex-1 place-items-center px-6 py-12 md:px-10">
-            <div className="grid grid-cols-2 gap-8 md:grid-cols-4 md:gap-12">
-              {techs.map((tech) => (
-                <div
-                  key={tech.name}
-                  className="flex flex-col items-center gap-3 text-center"
-                >
-                  <TechIcon
-                    icon={tech.icon}
-                    className="size-10 text-muted-foreground transition-colors hover:text-accent md:size-12"
-                  />
-                  <span className="font-mono text-xs text-muted-foreground md:text-sm">
-                    {tech.name}
-                  </span>
-                </div>
-              ))}
-            </div>
+          <div className="relative z-10 grid flex-1 grid-cols-2 md:grid-cols-4">
+            {techs.map((tech, i) => (
+              <div
+                key={tech.id}
+                className={`flex flex-col items-center justify-center gap-3 border-border p-8 text-center ${
+                  i % 2 === 0 ? "border-r" : ""
+                } ${i < techs.length - 2 ? "border-b" : ""} ${
+                  i % 4 !== 3 ? "md:border-r" : ""
+                } ${i < techs.length - 4 ? "md:border-b" : "md:border-b-0"}`}
+              >
+                <TechIcon
+                  icon={resolveIcon(tech.icon_slug)}
+                  className="size-10 text-muted-foreground transition-colors hover:text-accent md:size-12"
+                />
+                <span className="font-mono text-xs text-muted-foreground md:text-sm">
+                  {tech.name}
+                </span>
+              </div>
+            ))}
           </div>
         </section>
       </main>
