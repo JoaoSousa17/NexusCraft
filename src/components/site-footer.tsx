@@ -26,7 +26,11 @@ export function SiteFooter() {
         ))}
       </div>
       <div className="px-6 py-6 text-xs text-muted-foreground md:px-10">
-        © {new Date().getFullYear()} NexusCraft. Todos os direitos reservados.
+        © {new Date().getFullYear()}{" "}
+        <Link href="/login" className="text-accent hover:underline">
+          NexusCraft
+        </Link>
+        . Todos os direitos reservados.
       </div>
     </footer>
   );

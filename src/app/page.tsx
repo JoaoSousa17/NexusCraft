@@ -52,10 +52,14 @@ export default async function Home() {
           className="-right-24 top-24 size-72 border border-accent/30 md:size-96"
         />
 
-        <div className="relative z-10 flex flex-1 flex-col justify-center gap-12 px-6 py-16 md:flex-row md:items-center md:justify-between md:px-10">
-          <div className="flex flex-col">
-            <Logo size="lg" />
-            <h1 className="mt-10 max-w-xl font-display text-5xl uppercase leading-[1.05] tracking-tight md:text-6xl">
+        <div className="relative z-10 border-b border-border px-6 py-6 md:px-10">
+          <SectionTitle index="00">NexusCraft</SectionTitle>
+        </div>
+
+        <div className="relative z-10 grid flex-1 grid-cols-1 md:grid-cols-3">
+          <div className="flex flex-col justify-center border-b border-border p-8 md:col-span-2 md:border-b-0 md:border-r md:p-10">
+            <Logo size="lg" className="mb-10" />
+            <h1 className="max-w-xl font-display text-5xl uppercase leading-[1.05] tracking-tight md:text-6xl">
               Construímos os produtos que imaginamos.
             </h1>
             <p className="mt-6 max-w-md text-base text-muted-foreground md:text-lg">
@@ -64,7 +68,7 @@ export default async function Home() {
             </p>
           </div>
 
-          <div className="flex flex-col items-start gap-6 border-t border-border pt-8 md:items-end md:border-t-0 md:border-l md:pl-12 md:pt-0">
+          <div className="flex flex-col justify-center gap-6 p-8 md:p-10">
             <span className="font-mono text-xs uppercase tracking-widest text-muted-foreground">
               Disponível em
             </span>
@@ -113,20 +117,22 @@ export default async function Home() {
               <Link
                 key={project.slug}
                 href={`/projetos/${project.slug}`}
-                className={`group relative flex flex-col justify-between border-b border-border p-8 transition-colors hover:bg-muted md:border-b-0 md:p-10 ${
+                className={`group relative flex flex-col justify-between border-b border-border p-8 transition-colors hover:bg-accent md:border-b-0 md:p-10 ${
                   i !== projects.length - 1 ? "md:border-r" : ""
                 } border-border`}
               >
                 <div>
-                  <span className="font-mono text-xs text-muted-foreground">
+                  <span className="font-mono text-xs text-muted-foreground transition-colors group-hover:text-background/70">
                     {project.status}
                   </span>
-                  <h3 className="mt-4 text-xl font-medium">{project.name}</h3>
-                  <p className="mt-2 text-sm text-muted-foreground">
+                  <h3 className="mt-4 text-xl font-medium transition-colors group-hover:text-background">
+                    {project.name}
+                  </h3>
+                  <p className="mt-2 text-sm text-muted-foreground transition-colors group-hover:text-background/80">
                     {project.tagline}
                   </p>
                 </div>
-                <ArrowUpRight className="mt-8 size-5 text-muted-foreground transition-transform group-hover:translate-x-1 group-hover:-translate-y-1 group-hover:text-accent" />
+                <ArrowUpRight className="mt-8 size-5 text-muted-foreground transition-transform group-hover:translate-x-1 group-hover:-translate-y-1 group-hover:text-background" />
               </Link>
             ))}
           </div>
