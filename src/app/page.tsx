@@ -58,7 +58,7 @@ export default async function Home() {
 
         <div className="relative z-10 grid flex-1 grid-cols-1 md:grid-cols-3">
           <div className="flex flex-col justify-center border-b border-border p-8 md:col-span-2 md:border-b-0 md:border-r md:p-10">
-            <Logo size="lg" className="mb-10" />
+            <Logo size="lg" className="mb-10 self-start" />
             <h1 className="max-w-xl font-display text-5xl uppercase leading-[1.05] tracking-tight md:text-6xl">
               Construímos os produtos que imaginamos.
             </h1>
@@ -117,22 +117,22 @@ export default async function Home() {
               <Link
                 key={project.slug}
                 href={`/projetos/${project.slug}`}
-                className={`group relative flex flex-col justify-between border-b border-border p-8 transition-colors hover:bg-accent md:border-b-0 md:p-10 ${
+                className={`group relative flex flex-col justify-between border-b border-border p-8 transition-colors hover:bg-muted md:border-b-0 md:p-10 ${
                   i !== projects.length - 1 ? "md:border-r" : ""
                 } border-border`}
               >
                 <div>
-                  <span className="font-mono text-xs text-muted-foreground transition-colors group-hover:text-background/70">
+                  <span className="font-mono text-xs text-muted-foreground">
                     {project.status}
                   </span>
-                  <h3 className="mt-4 text-xl font-medium transition-colors group-hover:text-background">
+                  <h3 className="mt-4 text-xl font-medium transition-colors group-hover:text-accent">
                     {project.name}
                   </h3>
-                  <p className="mt-2 text-sm text-muted-foreground transition-colors group-hover:text-background/80">
+                  <p className="mt-2 text-sm text-muted-foreground">
                     {project.tagline}
                   </p>
                 </div>
-                <ArrowUpRight className="mt-8 size-5 text-muted-foreground transition-transform group-hover:translate-x-1 group-hover:-translate-y-1 group-hover:text-background" />
+                <ArrowUpRight className="mt-8 size-5 text-muted-foreground transition-transform group-hover:translate-x-1 group-hover:-translate-y-1 group-hover:text-accent" />
               </Link>
             ))}
           </div>

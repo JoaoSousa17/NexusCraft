@@ -8,6 +8,7 @@ const navItems = [
   { href: "/admin/projetos", label: "Projetos" },
   { href: "/admin/stack", label: "Stack" },
   { href: "/admin/links", label: "Links" },
+  { href: "/admin/users", label: "Contas" },
 ];
 
 export default function AdminLayout({

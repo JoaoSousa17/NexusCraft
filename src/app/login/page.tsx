@@ -10,7 +10,7 @@ export default async function LoginPage({
 
   return (
     <main className="flex min-h-screen w-full flex-col items-center justify-center px-6">
-      <Logo />
+      <Logo className="max-h-36" />
 
       <form
         action={login}
