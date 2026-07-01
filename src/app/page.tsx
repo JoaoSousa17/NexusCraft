@@ -52,17 +52,13 @@ export default async function Home() {
           className="-right-24 top-24 size-72 border border-accent/30 md:size-96"
         />
 
-        <div className="relative z-10 border-b border-border px-6 py-6 md:px-10">
-          <SectionTitle index="00">NexusCraft</SectionTitle>
-        </div>
-
         <div className="relative z-10 grid flex-1 grid-cols-1 md:grid-cols-3">
           <div className="flex flex-col justify-center border-b border-border p-8 md:col-span-2 md:border-b-0 md:border-r md:p-10">
             <Logo size="lg" className="mb-10 self-start" />
-            <h1 className="max-w-xl font-display text-5xl uppercase leading-[1.05] tracking-tight md:text-6xl">
+            <h1 className="max-w-2xl font-display text-5xl uppercase leading-[1.05] tracking-tight md:text-6xl">
               Construímos os produtos que imaginamos.
             </h1>
-            <p className="mt-6 max-w-md text-base text-muted-foreground md:text-lg">
+            <p className="mt-6 max-w-xl text-base text-muted-foreground md:text-lg">
               NexusCraft é o grupo que reúne os nossos projetos, aplicações e
               startups sob os mesmos princípios de engenharia e design.
             </p>
