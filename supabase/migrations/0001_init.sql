@@ -33,15 +33,16 @@ create table if not exists site_links (
 );
 
 -- Seed the 8 fixed stack slots and the default store links.
+-- Order: runtime → language → UI library → framework → build tool → styling → component lib → BaaS
 insert into stack_items (id, name, icon_slug, sort_order) values
-  (1, 'Next.js', 'siNextdotjs', 1),
-  (2, 'React', 'siReact', 2),
-  (3, 'TypeScript', 'siTypescript', 3),
-  (4, 'Tailwind CSS', 'siTailwindcss', 4),
-  (5, 'shadcn/ui', 'siShadcnui', 5),
-  (6, 'Supabase', 'siSupabase', 6),
-  (7, 'PostgreSQL', 'siPostgresql', 7),
-  (8, 'Node.js', 'siNodedotjs', 8)
+  (1, 'Node.js',      'siNodedotjs',   1),
+  (2, 'TypeScript',   'siTypescript',  2),
+  (3, 'React',        'siReact',       3),
+  (4, 'Next.js',      'siNextdotjs',   4),
+  (5, 'Vite',         'siVite',        5),
+  (6, 'Tailwind CSS', 'siTailwindcss', 6),
+  (7, 'shadcn/ui',    'siShadcnui',    7),
+  (8, 'Supabase',     'siSupabase',    8)
 on conflict (id) do nothing;
 
 insert into site_links (category, label, href, icon_slug, sort_order) values
