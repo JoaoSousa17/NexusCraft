@@ -10,11 +10,11 @@ export default async function LoginPage({
 
   return (
     <main className="flex min-h-screen w-full flex-col items-center justify-center px-6">
-      <Logo className="max-h-36" />
+      <Logo className="max-h-11" />
 
       <form
         action={login}
-        className="mt-12 w-full max-w-sm border border-border bg-muted/30 p-8"
+        className="mb-16 mt-10 w-full max-w-sm border border-border bg-muted/30 p-8"
       >
         <h1 className="font-display text-2xl uppercase tracking-tight">
           Acesso admin
