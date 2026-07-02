@@ -61,7 +61,9 @@ export async function saveProject(formData: FormData) {
   if (logo_image) payload.logo_image = logo_image;
   if (cover_image) payload.cover_image = cover_image;
 
-  if (id) {
+  const isUuid = /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i.test(id);
+
+  if (id && isUuid) {
     const { error } = await supabase.from("projects").update(payload).eq("id", id);
     if (error) redirect(`/admin/projetos/${id}?error=${encodeURIComponent(error.message)}`);
   } else {
