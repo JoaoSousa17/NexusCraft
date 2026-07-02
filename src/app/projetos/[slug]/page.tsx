@@ -64,7 +64,7 @@ export default async function ProjectPage({
 
         <div className="grid grid-cols-1 md:grid-cols-3">
           <div className="border-b border-border p-8 md:col-span-2 md:border-b-0 md:border-r md:p-10">
-            <h2 className="text-sm font-mono uppercase tracking-widest text-muted-foreground">
+            <h2 className="font-display text-xl uppercase tracking-tight text-foreground border-b border-border pb-2">
               Sobre o projeto
             </h2>
 
