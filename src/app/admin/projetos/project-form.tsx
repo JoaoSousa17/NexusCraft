@@ -5,7 +5,7 @@ const statuses = ["Em planeamento", "Em desenvolvimento", "Lançado"];
 
 export function ProjectForm({ project }: { project?: Project }) {
   return (
-    <form action={saveProject} className="mt-10 flex max-w-3xl flex-col gap-6">
+    <form action={saveProject} encType="multipart/form-data" className="mt-10 flex max-w-3xl flex-col gap-6">
       <input type="hidden" name="id" value={project?.id ?? ""} />
 
       <div className="grid grid-cols-1 gap-6 md:grid-cols-2">

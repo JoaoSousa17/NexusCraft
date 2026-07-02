@@ -62,9 +62,11 @@ export async function saveProject(formData: FormData) {
   if (cover_image) payload.cover_image = cover_image;
 
   if (id) {
-    await supabase.from("projects").update(payload).eq("id", id);
+    const { error } = await supabase.from("projects").update(payload).eq("id", id);
+    if (error) redirect(`/admin/projetos/${id}?error=${encodeURIComponent(error.message)}`);
   } else {
-    await supabase.from("projects").insert(payload);
+    const { error } = await supabase.from("projects").insert(payload);
+    if (error) redirect(`/admin/projetos/novo?error=${encodeURIComponent(error.message)}`);
   }
 
   revalidatePath("/admin/projetos");
